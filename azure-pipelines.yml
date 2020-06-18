@@ -1,5 +1,5 @@
 variables:
-  majorVersion: 1
+  majorVersion: 0
   minorVersion: 0
   patchVersion: $[counter(format('{0}.{1}', variables['majorVersion'], variables['minorVersion']), 0)]
   version: $[format('{0}.{1}.{2}', variables['majorVersion'], variables['minorVersion'], variables['patchVersion'])]
