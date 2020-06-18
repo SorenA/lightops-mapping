@@ -26,3 +26,5 @@ steps:
   - task: NuGetCommand@2
     inputs:
       command: push
+      feedsToUse: config
+      includeNugetOrg: true
