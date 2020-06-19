@@ -15,9 +15,10 @@ trigger:
       - README.md
 
 pool:
-  vmImage: "ubuntu-18.04"
+  vmImage: 'ubuntu-18.04'
 steps:
   - task: DotNetCoreCLI@2
+    displayName: 'dotnet restore'
     inputs:
       command: 'restore'
       projects: '**/*.csproj'
@@ -25,18 +26,22 @@ steps:
       nugetConfigPath: '$(System.DefaultWorkingDirectory)/nuget.config'
 
   - task: DotNetCoreCLI@2
+    displayName: 'dotnet build'
     inputs:
       command: 'build'
       projects: '**/*.csproj'
 
   - task: DotNetCoreCLI@2
+    displayName: 'dotnet pack'
     inputs:
       command: 'pack'
       packagesToPack: '**/*.csproj'
       versioningScheme: 'byBuildNumber'
 
   - task: DotNetCoreCLI@2
+    displayName: 'dotnet push'
     inputs:
       command: 'push'
       packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-      nuGetFeedType: 'internal'
+      nuGetFeedType: 'external'
+      publishFeedCredentials: 'NuGet.org'
