@@ -17,14 +17,26 @@ trigger:
 pool:
   vmImage: "ubuntu-18.04"
 steps:
-  - task: NuGetCommand@2
+  - task: DotNetCoreCLI@2
     inputs:
-      command: pack
-      packagesToPack: "**/*.csproj"
-      versioningScheme: byBuildNumber
+      command: 'restore'
+      projects: '**/*.csproj'
+      feedsToUse: 'config'
+      nugetConfigPath: '$(System.DefaultWorkingDirectory)\NuGet.config'
 
-  - task: NuGetCommand@2
+  - task: DotNetCoreCLI@2
     inputs:
-      command: push
-      feedsToUse: config
-      includeNugetOrg: true
+      command: 'build'
+      projects: '**/*.csproj'
+
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'pack'
+      packagesToPack: '**/*.csproj'
+      versioningScheme: 'byBuildNumber'
+
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'push'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+      nuGetFeedType: 'internal'
