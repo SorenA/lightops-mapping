@@ -83,15 +83,9 @@ stages:
             deploy:
               steps:
                 - checkout: self
-
-                # Download artifact
-                - task: DownloadBuildArtifacts@0
-                  displayName: Download artifact - nupkg
-                  inputs:
-                    buildType: current
-                    downloadPath: '$(System.ArtifactsDirectory)'
-                    downloadType: single
-                    artifactName: nupkg
+                  persistCredentials: true
+                  clean: true
+                  fetchDepth: 1
 
                 # Tag release in git
                 - task: Bash@3
