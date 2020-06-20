@@ -1,24 +1,24 @@
 variables:
-  MajorVersion: 0
-  MinorVersion: 1
-  PatchVersion: 0
-  SemVer: $[format('{0}.{1}.{2}', variables['MajorVersion'], variables['MinorVersion'], variables['PatchVersion'])]
+  majorVersion: 0
+  minorVersion: 1
+  patchVersion: 0
+  version: $[format('{0}.{1}.{2}', variables.majorVersion, variables.minorVersion, variables.patchVersion)]
   ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/master') }}:
     # Versioning: 1.0.0
-    Version: $[format('{0}', variables['SemVer'])]
-    BuildName: $[format('{0} (Build {1})', variables['Version'], variables['Build.BuildId'])]
+    semVersion: $[format('{0}', variables.version)]
+    BuildName: $[format('{0} - {1}', variables['Build.BuildId'], variables.semVersion)]
   ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/develop') }}:
     # Versioning: 1.0.0-alpha.123
-    VersionName: $[format('{0}-alpha', variables['SemVer'])]
-    VersionRev: $[counter(variables['VersionName'], 0)]
-    Version: $[format('{0}.{1}', variables['VersionName'], variables['VersionRev'])]
-    BuildName: $[format('Develop - {0} (Build {1})', variables['Version'], variables['Build.BuildId'])]
+    semVersionBase: $[format('{0}-alpha', variables.version)]
+    semVersionRev: $[counter(variables.semVersionBase, 0)]
+    semVersion: $[format('{0}.{1}', variables.semVersionBase, variables.semVersionRev)]
+    BuildName: $[format('{0} - Develop - {1}', variables['Build.BuildId'], variables.semVersion)]
   ${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/') }}:
     # Versioning: 1.0.0-alpha.feature.branch.123
-    VersionName: $[format('{0}-alpha.feature.{1}', variables['SemVer'], variables['Build.SourceBranchName'])]
-    VersionRev: $[counter(variables['VersionName'], 0)]
-    Version: $[format('{0}.{1}', variables['VersionName'], variables['VersionRev'])]
-    BuildName: $[format('Feature - {0} (Build {1})', variables['Version'], variables['Build.BuildId'])]
+    semVersionBase: $[format('{0}-alpha.feature.{1}', variables.version, variables['Build.SourceBranchName'])]
+    semVersionRev: $[counter(variables.semVersionBase, 0)]
+    semVersion: $[format('{0}.{1}', variables.semVersionBase, variables.semVersionRev)]
+    BuildName: $[format('{0} - Feature - {1}', variables['Build.BuildId'], variables.semVersion)]
 
 name: $(BuildName)
 
@@ -62,7 +62,7 @@ stages:
               command: pack
               packagesToPack: '**/*.csproj'
               versioningScheme: byEnvVar
-              versionEnvVar: Version
+              versionEnvVar: semVersion
 
           - task: PublishBuildArtifacts@1
             displayName: Publish artifacts
@@ -89,8 +89,8 @@ stages:
                   inputs:
                     targetType: inline
                     script: |
-                      git tag $(Version)
-                      git push $(Version)
+                      git tag $(semVersion)
+                      git push $(semVersion)
                       
                 - task: NuGetCommand@2
                   displayName: Release on NuGet.org
