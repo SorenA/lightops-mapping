@@ -7,6 +7,7 @@
     <Authors>SorenA</Authors>
     <Description>.NET Standard package for mapping.</Description>
     <IsPackable>true</IsPackable>
+    <RepositoryUrl>https://github.com/SorenA/lightops-mapping</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
