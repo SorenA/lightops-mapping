@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - README file describing project
 - Azure Pipelines based CI/CD setup
 - `IMapper` interface for implementing mappers
-- `IMappingService` to map using `IMapper`s in service provider
+- `IMappingService` and implementation `IMappingService` to map using `IMapper`s in service provider
 
 [unreleased]: https://github.com/SorenA/lightops-mapping/compare/0.1.0...develop
 [0.1.0]: https://github.com/SorenA/lightops-mapping/tree/0.1.0

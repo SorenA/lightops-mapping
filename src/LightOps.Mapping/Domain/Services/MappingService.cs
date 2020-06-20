@@ -25,6 +25,7 @@ namespace LightOps.Mapping.Domain.Services
                 return null;
             }
 
+            // Resolve mapper
             var mapper = _serviceProvider.GetService(typeof(IMapper<TSource, TDest>)) as IMapper<TSource, TDest>;
             if (mapper == null)
             {
@@ -43,6 +44,7 @@ namespace LightOps.Mapping.Domain.Services
                 return null;
             }
 
+            // Resolve mapper
             var mapper = _serviceProvider.GetService(typeof(IMapper<TSource, TDest>)) as IMapper<TSource, TDest>;
             if (mapper == null)
             {
