@@ -8,7 +8,7 @@ namespace LightOps.Mapping.Api.Services
     public interface IMappingService
     {
         /// <summary>
-        /// Maps <typeparamref name="TSource"/> to <typeparamref name="TDest"/>
+        /// Maps entity of type <typeparamref name="TSource"/> to type <typeparamref name="TDest"/>
         /// </summary>
         /// <typeparam name="TSource">The source type to map from</typeparam>
         /// <typeparam name="TDest">The destination type to map to</typeparam>
@@ -19,7 +19,7 @@ namespace LightOps.Mapping.Api.Services
             where TDest : class;
 
         /// <summary>
-        /// Maps an enumerable of <typeparamref name="TSource"/> to <typeparamref name="TDest"/>
+        /// Maps entities of type <typeparamref name="TSource"/> to type <typeparamref name="TDest"/>
         /// </summary>
         /// <typeparam name="TSource">The source type to map from</typeparam>
         /// <typeparam name="TDest">The destination type to map to</typeparam>
