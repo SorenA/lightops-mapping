@@ -38,6 +38,7 @@ trigger:
       - master
       - develop
       - feature/*
+      - release/*
   paths:
     exclude:
       - README.md
