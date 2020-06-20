@@ -29,6 +29,13 @@ variables:
     semVersionRev: $[counter(variables.semVersionBase, 0)]
     semVersion: $[format('{0}.{1}', variables.semVersionBase, variables.semVersionRev)]
     buildName: $[format('Feature - {0}', variables.semVersion)]
+  ${{ if eq(variables['Build.SourceBranch'], 'pr') }}: # Pull requests
+    # Versioning: 1.0.0-pr.1.123
+    releaseOnNuget: false
+    semVersionBase: $[format('{0}-pr.{1}', variables.version, variables['System.PullRequest.PullRequestId'])]
+    semVersionRev: $[counter(variables.semVersionBase, 0)]
+    semVersion: $[format('{0}.{1}', variables.semVersionBase, variables.semVersionRev)]
+    buildName: $[format('Pull Request - {0}', variables.semVersion)]
 
 name: $(BuildID) - $(buildName)
 
@@ -39,6 +46,16 @@ trigger:
       - develop
       - feature/*
       - release/*
+  paths:
+    exclude:
+      - README.md
+      - CHANGELOG.md
+   
+pr:
+  branches:
+    include:
+      - master
+      - develop
   paths:
     exclude:
       - README.md
@@ -83,11 +100,11 @@ stages:
               
   - stage: Release
     displayName: Release
+    condition: and(succeeded(), eq(variables.releaseOnNuget, 'true'))
     jobs:
       - deployment: ReleaseNuGet
         displayName: Release on NuGet.org
         environment: NuGetOrg
-        condition: and(succeeded(), eq(variables.releaseOnNuget, 'true'))
         pool:
           vmImage: ubuntu-18.04
         strategy:
