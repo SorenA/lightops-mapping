@@ -64,12 +64,11 @@ stages:
               versioningScheme: byEnvVar
               versionEnvVar: semVersion
 
-          - task: PublishBuildArtifacts@1
-            displayName: Publish artifacts
+          - task: PublishPipelineArtifact@1
+            displayName: Publish artifact - nupkg
             inputs:
-              pathToPublish: '$(Build.ArtifactStagingDirectory)'
+              targetPath: '$(Build.ArtifactStagingDirectory)'
               artifactName: nupkg
-              publishLocation: Container
               
   - stage: Release
     displayName: Release
@@ -84,9 +83,10 @@ stages:
             deploy:
               steps:
                 - checkout: self
-                
+
                 # Download artifact
                 - task: DownloadBuildArtifacts@0
+                  displayName: Download artifact - nupkg
                   inputs:
                     buildType: current
                     downloadPath: '$(System.ArtifactsDirectory)'
