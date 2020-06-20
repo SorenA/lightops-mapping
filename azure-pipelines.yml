@@ -94,7 +94,7 @@ stages:
                     targetType: inline
                     script: |
                       git tag $(semVersion)
-                      git push $(semVersion)
+                      git push --tags
                       
                 - task: NuGetCommand@2
                   displayName: Release on NuGet.org
