@@ -9,11 +9,15 @@ variables:
     BuildName: $[format('{0} (Build {1})', variables['Version'], variables['Build.BuildId'])]
   ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/develop') }}:
     # Versioning: 1.0.0-alpha.123
-    Version: $[format('{0}-alpha', variables['SemVer'])].$(Rev:r)
+    VersionName: $[format('{0}-alpha', variables['SemVer'])]
+    VersionRev: $[counter(variables['VersionName'], 0)]
+    Version: $[format('{0}.{1}', variables['VersionName'], variables['VersionRev'])]
     BuildName: $[format('Develop - {0} (Build {1})', variables['Version'], variables['Build.BuildId'])]
   ${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/') }}:
     # Versioning: 1.0.0-alpha.feature.branch.123
-    Version: $[format('{0}-alpha.feature.{1}', variables['SemVer'], variables['Build.SourceBranchName'])].$(Rev:r)
+    VersionName: $[format('{0}-alpha.feature.{1}', variables['SemVer'], variables['Build.SourceBranchName'])]
+    VersionRev: $[counter(variables['VersionName'], 0)]
+    Version: $[format('{0}.{1}', variables['VersionName'], variables['VersionRev'])]
     BuildName: $[format('Feature - {0} (Build {1})', variables['Version'], variables['Build.BuildId'])]
 
 name: $(BuildName)
