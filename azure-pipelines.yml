@@ -35,7 +35,7 @@ trigger:
 
 stages:
   - stage: Build
-    displayName: build
+    displayName: Build
     jobs:
       - job: Build
         displayName: Build
@@ -67,8 +67,8 @@ stages:
           - task: PublishBuildArtifacts@1
             displayName: Publish artifacts
             inputs:
-              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-              ArtifactName: nupkg
+              pathToPublish: '$(Build.ArtifactStagingDirectory)'
+              artifactName: nupkg
               publishLocation: Container
               
   - stage: Release
@@ -83,6 +83,16 @@ stages:
           runOnce:
             deploy:
               steps:
+                - checkout: self
+                
+                # Download artifact
+                - task: DownloadBuildArtifacts@0
+                  inputs:
+                    buildType: current
+                    downloadPath: '$(System.ArtifactsDirectory)'
+                    downloadType: single
+                    artifactName: nupkg
+
                 # Tag release in git
                 - task: Bash@3
                   displayName: Tag version in git
@@ -96,7 +106,7 @@ stages:
                   displayName: Release on NuGet.org
                   inputs:
                     command: push
-                    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+                    packagesToPush: '$(Build.ArtifactsDirectory)/**/*.nupkg;!$(Build.ArtifactsDirectory)/**/*.symbols.nupkg'
                     nuGetFeedType: external
                     publishFeedCredentials: NuGet.org
                     
