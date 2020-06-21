@@ -52,7 +52,9 @@ namespace LightOps.Mapping.Domain.Services
             }
 
             return source
-                .Select(mapper.Map)
+                .Select(s => s != null
+                    ? mapper.Map(s)
+                    : null)
                 .ToList();
         }
     }
