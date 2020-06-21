@@ -21,3 +21,29 @@ Map either of the following:
 
 - `IMappingService.Map<TSource, TDest>(TSource source)`
 - `IMappingService.Map<TSource, TDest>(IEnumerable<TSource> source)`
+
+## Attaching the component
+
+Register during startup through the `AddMapping` extension on `IDependencyInjectionRootComponent`.
+
+```csharp
+// Add root component
+services.AddLightOpsDependencyInjection(root =>
+{
+    // Add component
+    root.AddMapping(component =>
+    {
+        // Configure component
+        // ...
+    });
+
+    // Register other components
+    // ...
+});
+```
+
+Overrides may be registered in the component configurator action, see `IMappingComponent` for documentation.
+
+### Required component dependencies
+
+- `LightOps.DependencyInjection` - 0.1.x
