@@ -8,6 +8,11 @@
     <Description>.NET Standard package for mapping.</Description>
     <IsPackable>true</IsPackable>
     <RepositoryUrl>https://github.com/SorenA/lightops-mapping</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LightOps.DependencyInjection" Version="0.1.*" />
+  </ItemGroup>
 
 </Project>
