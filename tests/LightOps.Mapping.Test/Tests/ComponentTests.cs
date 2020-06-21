@@ -23,7 +23,7 @@ namespace LightOps.Mapping.Test.Tests
 
             var serviceProvider = services.BuildServiceProvider();
 
-            // Get 
+            // Get component state provider
             var dependencyInjectionComponentStateProvider = serviceProvider.GetService<IDependencyInjectionComponentStateProvider>();
 
             Assert.Contains("lightops.mapping",

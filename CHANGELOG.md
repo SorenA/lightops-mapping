@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2020-06-21
+
 ### Added
 
 - XML documentation on interfaces
@@ -24,5 +26,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `IMapper` interface for implementing mappers
 - `IMappingService` and implementation `IMappingService` to map using `IMapper`s in service provider
 
-[unreleased]: https://github.com/SorenA/lightops-mapping/compare/0.1.0...develop
+[unreleased]: https://github.com/SorenA/lightops-mapping/compare/0.2.0...develop
+[0.2.0]: https://github.com/SorenA/lightops-mapping/tree/0.2.0
 [0.1.0]: https://github.com/SorenA/lightops-mapping/tree/0.1.0
