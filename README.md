@@ -10,11 +10,11 @@ The package defines the following concepts.
 
 ### Mapper interface - `IMapper`
 
-Mapper interface used to resolve mappers in the service provider.
+Mapper interface used to resolve mappers in the service container.
 
 ### Mapping service - `IMappingService` and implementation `MappingService`
 
-Resolves mappers using the `IMapper` interface using the source and destination types in the service provider.  
+Resolves mappers using the `IMapper` interface using the source and destination types in the service container.  
 Throws a `MapperNotFoundException` if no mapper is found.
 
 Map either of the following:
