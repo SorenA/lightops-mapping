@@ -26,7 +26,7 @@ namespace LightOps.Mapping.Configuration
 
         private readonly Dictionary<Services, ServiceRegistration> _services = new Dictionary<Services, ServiceRegistration>
         {
-            [Services.MappingService] = ServiceRegistration.Scoped<IMappingService, MappingService>(),
+            [Services.MappingService] = ServiceRegistration.Transient<IMappingService, MappingService>(),
         };
 
         public IMappingComponent OverrideMappingService<T>()
