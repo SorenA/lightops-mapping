@@ -17,12 +17,10 @@ namespace LightOps.Mapping.Domain.Services
         }
 
         public TDest Map<TSource, TDest>(TSource source)
-            where TSource : class
-            where TDest : class
         {
             if (source == null)
             {
-                return null;
+                return default;
             }
 
             // Resolve mapper
@@ -36,8 +34,6 @@ namespace LightOps.Mapping.Domain.Services
         }
 
         public IEnumerable<TDest> Map<TSource, TDest>(IEnumerable<TSource> source)
-            where TSource : class
-            where TDest : class
         {
             if (source == null)
             {
@@ -54,7 +50,7 @@ namespace LightOps.Mapping.Domain.Services
             return source
                 .Select(s => s != null
                     ? mapper.Map(s)
-                    : null)
+                    : default)
                 .ToList();
         }
     }

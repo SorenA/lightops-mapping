@@ -5,12 +5,12 @@ namespace LightOps.Mapping.Test.Mock
 {
     public class NullMappingService : IMappingService
     {
-        public TDest Map<TSource, TDest>(TSource source) where TSource : class where TDest : class
+        public TDest Map<TSource, TDest>(TSource source)
         {
-            return null;
+            return default;
         }
 
-        public IEnumerable<TDest> Map<TSource, TDest>(IEnumerable<TSource> source) where TSource : class where TDest : class
+        public IEnumerable<TDest> Map<TSource, TDest>(IEnumerable<TSource> source)
         {
             return null;
         }
