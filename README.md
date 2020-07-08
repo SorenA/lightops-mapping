@@ -6,8 +6,8 @@ Mapping package for .NET Standard.
 
 | Branch | CI |
 | --- | --- |
-| master | ![Build Status](https://dev.azure.com/sorendev/LightOps%20Packages/_apis/build/status/SorenA.lightops-mapping?branchName=master) |
-| develop | ![Build Status](https://dev.azure.com/sorendev/LightOps%20Packages/_apis/build/status/SorenA.lightops-mapping?branchName=develop) |
+| master | ![Build Status](https://dev.azure.com/sorendev/LightOps%20Packages/_apis/build/status/LightOps.Mapping?branchName=master) |
+| develop | ![Build Status](https://dev.azure.com/sorendev/LightOps%20Packages/_apis/build/status/LightOps.Mapping?branchName=develop) |
 
 ## Concepts
 
